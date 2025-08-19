@@ -1,65 +1,34 @@
-[README.md](https://github.com/user-attachments/files/21847140/README.md)
-# PokiCoin Backend
+# PokiCoin Backend (Railway Ready)
 
 Backend sederhana untuk Telegram Bot + MiniApp, dibangun dengan Flask.  
-Digunakan untuk menyimpan progress user (XP & Coin) dan validasi iklan Monetag.
+Disiapkan khusus agar bisa jalan di Railway atau Render.
 
-## 🚀 Cara Deploy ke Render
+## 🚀 Deploy ke Railway
+1. Fork repo ini ke GitHub kamu.
+2. Buka [Railway.app](https://railway.app/).
+3. Klik **New Project → Deploy from GitHub Repo**.
+4. Pilih repo ini.
+5. Railway akan otomatis baca `Procfile` dan menjalankan:
+   ```
+   web: gunicorn server:app
+   ```
+6. Setelah deploy, Railway kasih URL misalnya:
+   ```
+   https://pokicoin-backend.up.railway.app
+   ```
 
-1. Fork/clone repo ini ke akun GitHub kamu.
-2. Buka [Render.com](https://render.com/).
-3. Pilih **New → Web Service**.
-4. Hubungkan dengan repo ini.
-5. Setting:
-   - **Environment**: Python 3
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn server:app`
-6. Deploy → Render akan memberi URL backend, contoh:
-   ```
-   https://pokicoin-backend.onrender.com
-   ```
+## 🚀 Deploy ke Render
+1. Pilih **New Web Service** di [Render.com](https://render.com/).
+2. Hubungkan repo ini.
+3. Build command: `pip install -r requirements.txt`
+4. Start command: `gunicorn server:app`
 
 ## 📡 Endpoint
-
-- `GET /progress/<user_id>`  
-  Ambil progress user.  
-
-  **Contoh**:  
-  ```
-  https://pokicoin-backend.onrender.com/progress/12345
-  ```
-
-  **Response**:
-  ```json
-  {
-    "xp": 10,
-    "coin": 10
-  }
-  ```
-
-- `POST /callback`  
-  Update reward setelah user nonton iklan.  
-
-  **Body JSON**:
-  ```json
-  {
-    "user_id": 12345,
-    "reward": 10
-  }
-  ```
-
-  **Response**:
-  ```json
-  {
-    "status": "ok",
-    "new_data": {
-      "xp": 20,
-      "coin": 20
-    }
-  }
-  ```
+- GET `/progress/<user_id>` → ambil data user.
+- POST `/callback` → update reward.
 
 ## 📂 File Penting
-- `server.py` → Flask server utama
-- `requirements.txt` → daftar dependensi
-- `user_progress.json` → file penyimpanan progress user
+- `server.py` → Flask server
+- `requirements.txt` → dependensi
+- `Procfile` → command untuk Railway
+- `user_progress.json` → penyimpanan data
