@@ -1,52 +1,52 @@
-from flask import Flask, request, jsonify
-import json
-import os
+from fastapi import FastAPI
+import json, os
 
-app = Flask(__name__)
+app = FastAPI()
 
-# File penyimpanan progress user
 DATA_FILE = "user_progress.json"
 
-# Fungsi load & save data
-def load_data():
+def load_progress():
     if not os.path.exists(DATA_FILE):
         return {}
     with open(DATA_FILE, "r") as f:
-        try:
-            return json.load(f)
-        except:
-            return {}
+        return json.load(f)
 
-def save_data(data):
+def save_progress(progress):
     with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+        json.dump(progress, f, indent=4)
 
-@app.route("/")
-def home():
-    return "✅ PokiCoin Backend is running!"
+@app.get("/")
+async def root():
+    return {"status": "ok", "msg": "PokiCoin API running"}
 
-@app.route("/progress/<int:user_id>", methods=["GET"])
-def get_progress(user_id):
-    data = load_data()
-    user = data.get(str(user_id), {"xp": 0, "coin": 0})
-    return jsonify(user)
+@app.get("/api/validate/{user_id}/{ad_id}")
+async def validate(user_id: str, ad_id: str):
+    progress = load_progress()
 
-@app.route("/callback", methods=["POST"])
-def callback():
-    body = request.json
-    user_id = str(body.get("user_id"))
-    reward = int(body.get("reward", 0))
+    if user_id not in progress:
+        progress[user_id] = {"ad1": False, "ad2": False, "balance": 0, "reward_claimed": False}
 
-    data = load_data()
-    if user_id not in data:
-        data[user_id] = {"xp": 0, "coin": 0}
+    # validasi iklan
+    if ad_id in ["ad1", "ad2"]:
+        progress[user_id][ad_id] = True
+        save_progress(progress)
+        return {"status": "success", "user": user_id, "ad": ad_id}
 
-    data[user_id]["xp"] += reward
-    data[user_id]["coin"] += reward
+    # klaim reward
+    if ad_id == "reward":
+        if progress[user_id]["ad1"] and progress[user_id]["ad2"]:
+            if not progress[user_id].get("reward_claimed", False):
+                progress[user_id]["balance"] += 10
+                progress[user_id]["reward_claimed"] = True
+                save_progress(progress)
+                return {"status": "success", "msg": "Reward claimed", "balance": progress[user_id]["balance"]}
+            else:
+                return {"status": "error", "msg": "Reward already claimed"}
+        else:
+            return {"status": "error", "msg": "Complete ads first"}
 
-    save_data(data)
-    return jsonify({"status": "ok", "new_data": data[user_id]})
+    # cek balance
+    if ad_id == "balance":
+        return {"status": "success", "balance": progress[user_id]["balance"]}
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    return {"status": "error", "msg": "Invalid ad_id"}
