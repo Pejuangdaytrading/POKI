@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Watch Ad to Earn POKI</title>
+  <!-- Monetag SDK -->
+  <script src="//libtl.com/sdk.js" data-zone="9735561" data-sdk="show_9735561"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #222;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎬 Watch Ad to Earn POKI</h2>
+  <button id="playBtn" onclick="playAd()">▶ Watch Ad</button>
+
+  <script>
+    async function playAd() {
+      const btn = document.getElementById("playBtn");
+      btn.disabled = true;
+      btn.innerText = "⏳ Watching...";
+
+      try {
+        await show_9735561(); // Tunggu iklan Monetag selesai
+
+        // Ambil user_id & ad dari URL (kirim callback ke server.py)
+        const urlParams = new URLSearchParams(window.location.search);
+        const user_id = urlParams.get("user_id");
+        const ad = urlParams.get("ad");
+
+        await fetch(`/progress/${user_id}?ad=${ad}`);
+
+        alert("✅ Ad watched! Reward unlocked.");
+        btn.innerText = "🎉 Done!";
+      } catch (err) {
+        console.error("Ad error:", err);
+        alert("⚠️ Failed to show ad. Please try again.");
+        btn.disabled = false;
+        btn.innerText = "▶ Watch Ad";
+      }
+    }
+  </script>
+</body>
+</html>
