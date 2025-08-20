@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /visit.html
+Allow: /
+
+Sitemap: https://dailyfunhub.site/sitemap.xml
