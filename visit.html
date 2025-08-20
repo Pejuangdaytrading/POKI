@@ -59,6 +59,25 @@
       color: #8b949e;
     }
   </style>
+  <div id="visitor-counter" style="text-align:center; margin-top:20px; color:#ccc; font-size:14px;">
+    Loading visits...
+</div>
+
+<script>
+(function() {
+    const counterKey = "visitCounter";
+    let count = localStorage.getItem(counterKey);
+
+    if (!count) {
+        count = 0;
+    }
+    count = parseInt(count) + 1;
+    localStorage.setItem(counterKey, count);
+
+    document.getElementById("visitor-counter").innerText = "Local Visits Counted: " + count;
+})();
+</script>
+
 </head>
 <body>
   <header>
@@ -111,3 +130,4 @@
   </footer>
 </body>
 </html>
+
