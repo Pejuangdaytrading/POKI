@@ -59,25 +59,6 @@
       color: #8b949e;
     }
   </style>
-  <div id="visitor-counter" style="text-align:center; margin-top:20px; color:#ccc; font-size:14px;">
-    Loading visits...
-</div>
-
-<script>
-(function() {
-    const counterKey = "visitCounter";
-    let count = localStorage.getItem(counterKey);
-
-    if (!count) {
-        count = 0;
-    }
-    count = parseInt(count) + 1;
-    localStorage.setItem(counterKey, count);
-
-    document.getElementById("visitor-counter").innerText = "Local Visits Counted: " + count;
-})();
-</script>
-
 </head>
 <body>
   <header>
@@ -123,9 +104,13 @@
         d.getElementById(params.bvwidgetid).appendChild(s);
       })(document);
     </script>
-    <!-- Begin BidVertiser code -->
-<SCRIPT data-cfasync="false" SRC="//bdv.bidvertiser.com/BidVertiser.dbm?pid=939695&bid=2101491" TYPE="text/javascript"></SCRIPT>
-<!-- End BidVertiser code -->
+
+    <!-- Banner Ad BidVertiser -->
+    <div style="margin:40px 0; text-align:center;">
+      <!-- Begin BidVertiser code --> 
+      <script data-cfasync="false" src="//bdv.bidvertiser.com/BidVertiser.dbm?pid=939695&bid=2101491" type="text/javascript"></script>
+      <!-- End BidVertiser code -->
+    </div>
   </main>
 
   <footer>
@@ -133,5 +118,3 @@
   </footer>
 </body>
 </html>
-
-
