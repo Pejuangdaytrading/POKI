@@ -1,64 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Watch Ad to Earn POKI</title>
-  <!-- Monetag SDK -->
-  <script src="//libtl.com/sdk.js" data-zone="9735561" data-sdk="show_9735561"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DailyFunHub — Easy Ways to Earn Money Online (Beginner Friendly)</title>
+  <meta name="description" content="Simple, safe, and scalable ways to make money online. Walkthroughs for CPM ads, shortlinks, faucets, GPT tasks, and a fully-automatic autosurf-to-CPM setup." />
+  <link rel="canonical" href="https://dailyfunhub.site/">
+
+  <!-- Bidvertiser2101485 -->
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-      background: #f9f9f9;
+    :root{
+      --bg:#0b1220; --card:#121a2b; --muted:#8fa3c8; --text:#e9f0ff; --brand:#7bdcff; --brand2:#b38cff;
+      --ok:#44d19a; --warn:#ffd166;
     }
-    h2 {
-      color: #222;
-    }
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 6px;
-      background: #007bff;
-      color: white;
-    }
-    button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 20% -10%, rgba(123,220,255,.15), transparent) no-repeat,
+                               radial-gradient(1000px 700px at 100% 10%, rgba(179,140,255,.12), transparent) no-repeat,
+                               var(--bg);
+               color:var(--text); font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:980px;margin:0 auto;padding:24px}
+    .hero{padding:40px 20px;text-align:center}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(123,220,255,.1);color:var(--brand);border:1px solid rgba(123,220,255,.35);font-weight:600}
+    h1{font-size:clamp(28px,5vw,42px);line-height:1.15;margin:12px 0;background:linear-gradient(90deg,var(--brand),var(--brand2));
+       -webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:760px;margin:0 auto;color:#c9d6ff}
+    .grid{display:grid;gap:18px}
+    @media(min-width:820px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08);
+          box-shadow:0 10px 30px rgba(0,0,0,.25); border-radius:16px; padding:18px}
+    .card h3{margin:6px 0 8px 0}
+    .card p{margin:0}
+    .pro{color:var(--ok);font-weight:600}
+    .con{color:var(--warn);font-weight:600}
+    .section{margin:34px 0}
+    .toc{background:rgba(255,255,255,.04); border:1px dashed rgba(255,255,255,.15); border-radius:12px; padding:12px}
+    .ad-slot{display:grid;place-items:center;height:120px;border:1px dashed rgba(255,255,255,.2);border-radius:12px;color:var(--muted);margin:18px 0}
+    .pill{display:inline-block;padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.06);color:#dfe7ff;border:1px solid rgba(255,255,255,.12);font-size:12px}
+    .steps ol{margin:0;padding-left:22px}
+    .footer{opacity:.7;text-align:center;margin:36px 0}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Liberation Mono",monospace;background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px;border:1px solid rgba(255,255,255,.12)}
   </style>
 </head>
 <body>
-  <h2>🎬 Watch Ad to Earn POKI</h2>
-  <button id="playBtn" onclick="playAd()">▶ Watch Ad</button>
+  <header class="container hero">
+    <span class="badge">Beginner Friendly • Scalable • Mostly Automatic</span>
+    <h1>Easy Ways to Earn Money Online (That Actually Work)</h1>
+    <p class="lead">
+      This guide shows practical methods that pay small amounts per action but can scale with volume:
+      CPM ads, shortlinks, GPT/faucets, and a fully-automatic <strong>autosurf → CPM</strong> setup you can run 24/7.
+    </p>
+  </header>
 
-  <script>
-    async function playAd() {
-      const btn = document.getElementById("playBtn");
-      btn.disabled = true;
-      btn.innerText = "⏳ Watching...";
+  <main class="container">
+    <div id="ad-top" class="ad-slot">
+      <!-- Place BidVertiser/PopAds code here after your site is approved -->
+      <small>Ad Slot (Top)</small>
+    </div>
 
-      try {
-        await show_9735561(); // Tunggu iklan Monetag selesai
+    <section class="section toc">
+      <strong>TL;DR</strong>
+      <ul>
+        <li>For true automation, use a <em>CPM ad</em> landing page. Autosurf traffic counts as impressions → money.</li>
+        <li>Shortlinks only work well if they offer <em>direct link</em> (no button/captcha).</li>
+        <li>Combine multiple streams: CPM + video rewards (Hideout/Loot) + faucets/GPT for extra daily drip.</li>
+      </ul>
+      <div>
+        <span class="pill">No skills required</span>
+        <span class="pill">Works on low-end VPS</span>
+        <span class="pill">Scale with multiple devices</span>
+      </div>
+    </section>
 
-        // Ambil user_id & ad dari URL (kirim callback ke server.py)
-        const urlParams = new URLSearchParams(window.location.search);
-        const user_id = urlParams.get("user_id");
-        const ad = urlParams.get("ad");
+    <section class="section">
+      <h2>Start Here: 3 Simple Methods</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1) CPM Ads (Most Automatic)</h3>
+          <p><span class="pro">Pros:</span> counts impressions, no clicks needed; ideal for autosurf. <span class="con">Cons:</span> low CPM ($0.5–$3 per 1k views).</p>
+          <ul>
+            <li>Networks tolerant to mixed traffic: <em>BidVertiser</em>, <em>PopAds</em>, <em>AdCash</em>.</li>
+            <li>Create a minimal landing page with 2–3 ad units and send autosurf traffic there.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2) Shortlinks (Direct Mode)</h3>
+          <p><span class="pro">Pros:</span> higher payout per 1k if direct-redirect is allowed. <span class="con">Cons:</span> rare; risk of rejection if auto-bypass.</p>
+          <ul>
+            <li>Look for <strong>Direct Link</strong> feature; avoid captcha/interstitial flows for bots.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3) Video Rewards & Faucets</h3>
+          <p><span class="pro">Pros:</span> reliable payouts via points → PayPal/crypto. <span class="con">Cons:</span> needs many tabs/devices.</p>
+          <ul>
+            <li>Examples: HideoutTV, LootTV, Idle-Empire, FireFaucet (auto-claim).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-        await fetch(`/progress/${user_id}?ad=${ad}`);
+    <section id="autosurf-cpm" class="section steps">
+      <h2>Step-by-Step: Fully Automatic Autosurf → CPM Ads</h2>
+      <ol>
+        <li><strong>Verification</strong>: keep the code <span class="kbd">&lt;!-- Bidvertiser2101485 --&gt;</span> inside your homepage source (already added).</li>
+        <li><strong>Create a dedicated URL</strong> for traffic exchange, e.g. <span class="kbd">/visit</span>, to separate real users from bot traffic.</li>
+        <li><strong>Add 2–3 ad units</strong> (banner or pop-under). Place one above the fold, one mid-article, one at the bottom.</li>
+        <li><strong>Throttle</strong>: enable small delays (2–5 s) between automatic redirects to reduce bounce spikes.</li>
+        <li><strong>Send traffic</strong> from autosurf services (OtoHits, 10KHits, Hit4Hit) to the <span class="kbd">/visit</span> page.</li>
+        <li><strong>Monitor</strong> CPM and approval status. Start with low volume (≤ 500/day) then ramp gradually.</li>
+      </ol>
 
-        alert("✅ Ad watched! Reward unlocked.");
-        btn.innerText = "🎉 Done!";
-      } catch (err) {
-        console.error("Ad error:", err);
-        alert("⚠️ Failed to show ad. Please try again.");
-        btn.disabled = false;
-        btn.innerText = "▶ Watch Ad";
-      }
-    }
-  </script>
+      <div id="ad-mid" class="ad-slot">
+        <!-- Place a second ad unit here (e.g., 300x250 / popunder trigger) -->
+        <small>Ad Slot (Middle)</small>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Article: Easy Ways to Earn Money Online (That Scale with Volume)</h2>
+      <p>
+        Making money online is often about <em>repeatable micro-earnings</em>. One action may pay only $0.001–$0.01,
+        but repeated a thousand times a day across multiple devices, it adds up. The key is choosing
+        methods that are (1) safe, (2) mostly automatic, and (3) scalable.
+      </p>
+      <h3>Why CPM Ads Fit Automation</h3>
+      <p>
+        CPM networks pay per <strong>impression</strong>, not per click. That makes them ideal for passive traffic sources
+        like autosurf or rotators. While CPM is low, impressions are trivial to generate at scale and do not require
+        user interaction. Use a clean landing page, avoid heavy scripts, and keep content clear to pass manual reviews.
+      </p>
+      <h3>Shortlinks: Use Only Direct Redirect</h3>
+      <p>
+        Traditional shorteners show an interstitial page with a “Continue” button or captcha—bots stop there.
+        If you find a direct-link option (no button/captcha), you can blend it with CPM ads. Otherwise, stick to CPM.
+      </p>
+      <h3>Supplement with Video Rewards & Faucets</h3>
+      <p>
+        Video reward platforms and auto-faucets provide predictable daily drip. Run them on spare devices or low-cost VPSs.
+        The earnings are small per device, but consistent, and you can spread across multiple accounts (respecting TOS).
+      </p>
+      <h3>Risk Management</h3>
+      <ul>
+        <li>Never mix autosurf traffic with Google AdSense or strict networks.</li>
+        <li>Scale slowly; sudden spikes may trigger extra reviews.</li>
+        <li>Separate real-user pages from autosurf pages using different URLs.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Mini FAQ</h2>
+      <p><strong>Q:</strong> Will free subdomains work?<br>
+         <strong>A:</strong> Use your own domain (like this site). Networks trust custom domains more than free hosts.</p>
+      <p><strong>Q:</strong> How much can I earn?<br>
+         <strong>A:</strong> With CPM $0.5–$3, 5,000 impressions/day ≈ $2.5–$15. Multiply by devices/VPS to scale.</p>
+      <p><strong>Q:</strong> Is this allowed?<br>
+         <strong>A:</strong> Only use ad networks that permit or tolerate exchange/mixed traffic. Read each TOS.</p>
+    </section>
+
+    <div id="ad-bottom" class="ad-slot">
+      <!-- Place another ad unit here (e.g., 728x90) -->
+      <small>Ad Slot (Bottom)</small>
+    </div>
+
+    <footer class="footer">
+      © <span id="y"></span> DailyFunHub • Built for simple, scalable online earning.
+    </footer>
+  </main>
+
+  <!-- Optional tiny script just for the year -->
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
