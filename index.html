@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +28,13 @@
     <h1>DailyFunHub</h1>
     <nav>
       <a href="/">Home</a>
-      <a href="/articles/easy-online-jobs.html">Articles</a>
+      <a href="/articles/">Articles</a>
       <a href="/visit.html">Visit</a>
     </nav>
   </header>
 
   <main class="container">
-    <!-- Konten utama (dari index lama) -->
+    <!-- Konten utama -->
     <section class="section">
       <h2>Easy Ways to Earn Money Online (That Actually Work)</h2>
       <p>
@@ -49,75 +48,26 @@
       </ul>
     </section>
 
-    <!-- Daftar Artikel -->
-<section class="section">
-  <h2>Latest Articles</h2>
-  <div id="article-list"></div>
-</section>
-
-<script>
-async function loadArticles() {
-  try {
-    const response = await fetch("sitemap.xml");
-    const text = await response.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, "application/xml");
-    const urls = xml.querySelectorAll("url loc");
-    
-    const list = document.getElementById("article-list");
-
-    for (let loc of urls) {
-      const url = loc.textContent;
-      if (url.includes("/articles/")) {
-        try {
-          const res = await fetch(url);
-          const html = await res.text();
-          const doc = new DOMParser().parseFromString(html, "text/html");
-
-          let title = doc.querySelector("title")?.textContent || 
-                      doc.querySelector("h2")?.textContent || 
-                      url.split("/").pop();
-
-          let excerpt = doc.querySelector("p")?.textContent || "";
-          if (excerpt.length > 150) {
-            excerpt = excerpt.substring(0, 150) + "...";
-          }
-
-          const card = document.createElement("div");
-          card.className = "card";
-
-          const h3 = document.createElement("h3");
-          const a = document.createElement("a");
-          a.href = url;
-          a.textContent = title;
-          h3.appendChild(a);
-
-          const p = document.createElement("p");
-          p.textContent = excerpt;
-
-          card.appendChild(h3);
-          card.appendChild(p);
-          list.appendChild(card);
-
-        } catch (err) {
-          console.warn("Failed to fetch article:", url, err);
-        }
-      }
-    }
-  } catch (e) {
-    console.error("Error loading sitemap:", e);
-  }
-}
-loadArticles();
-</script>
-
+    <!-- Highlight artikel (opsional, 2 artikel awal) -->
+    <section class="section">
+      <h2>Featured Articles</h2>
+      <div class="card">
+        <h3><a href="/articles/easy-online-jobs.html">Top 5 Easy Online Jobs You Can Start Today</a></h3>
+        <p>Beginner-friendly online jobs like data entry, surveys, freelance writing, and more.</p>
+      </div>
+      <div class="card">
+        <h3><a href="/articles/save-and-grow-money.html">How to Save and Grow Money Even With Small Income</a></h3>
+        <p>Practical ways to manage expenses, automate savings, and invest wisely.</p>
+      </div>
+      <p><a href="/articles/">→ View All Articles</a></p>
+    </section>
 
     <!-- Visit Page Placeholder -->
     <section class="section">
       <h2>Visit Page (Autosurf)</h2>
       <p>
         This page will be available soon. It will be dedicated for automated traffic and ad testing. 
-        For now, please explore our <a href="/articles/easy-online-jobs.html">Articles</a> for organic content.
+        For now, please explore our <a href="/articles/">Articles</a> for organic content.
       </p>
     </section>
   </main>
