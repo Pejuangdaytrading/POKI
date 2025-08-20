@@ -2,21 +2,18 @@ name: Generate Sitemap
 
 on:
   push:
-    paths:
-      - 'articles/**'
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # ✅ penting! biar bisa push balik
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,13 +21,12 @@ jobs:
           python-version: '3.x'
 
       - name: Run sitemap generator
-        run: |
-          python generate_sitemap.py
+        run: python generate_sitemap.py
 
       - name: Commit and push sitemap
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "update sitemap" || echo "no changes to commit"
+          git commit -m "update sitemap" || echo "No changes to commit"
           git push
