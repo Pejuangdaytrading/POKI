@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Articles - DailyFunHub</title>
+  <meta name="description" content="Browse all articles from DailyFunHub about simple ways to earn money online." />
+
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto;background:#0b1220;color:#e9f0ff}
+    header{background:#121a2b;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
+    header h1{font-size:20px;margin:0;background:linear-gradient(90deg,#7bdcff,#b38cff);
+              -webkit-background-clip:text;color:transparent}
+    nav a{color:#e9f0ff;margin-left:18px;text-decoration:none;font-weight:500}
+    nav a:hover{text-decoration:underline}
+    .container{max-width:960px;margin:0 auto;padding:20px}
+    .section{margin:36px 0}
+    h2{color:#7bdcff}
+    .card{background:#121a2b;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;margin-bottom:20px}
+    footer{text-align:center;padding:20px;color:#8fa3c8;font-size:14px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DailyFunHub</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/visit.html">Visit</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2>All Articles</h2>
+      <div id="article-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> DailyFunHub • Simple, scalable online earning guides.
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    async function loadArticles() {
+      try {
+        const response = await fetch("/sitemap.xml");
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "application/xml");
+        const urls = xml.querySelectorAll("url loc");
+        
+        const list = document.getElementById("article-list");
+
+        for (let loc of urls) {
+          const url = loc.textContent;
+          if (url.includes("/articles/") && !url.endsWith("/articles/")) {
+            try {
+              const res = await fetch(url);
+              const html = await res.text();
+              const doc = new DOMParser().parseFromString(html, "text/html");
+
+              let title = doc.querySelector("title")?.textContent || 
+                          doc.querySelector("h2")?.textContent || 
+                          url.split("/").pop();
+
+              let excerpt = doc.querySelector("p")?.textContent || "";
+              if (excerpt.length > 150) {
+                excerpt = excerpt.substring(0, 150) + "...";
+              }
+
+              const card = document.createElement("div");
+              card.className = "card";
+
+              const h3 = document.createElement("h3");
+              const a = document.createElement("a");
+              a.href = url;
+              a.textContent = title;
+              h3.appendChild(a);
+
+              const p = document.createElement("p");
+              p.textContent = excerpt;
+
+              card.appendChild(h3);
+              card.appendChild(p);
+              list.appendChild(card);
+
+            } catch (err) {
+              console.warn("Failed to fetch article:", url, err);
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Error loading sitemap:", e);
+      }
+    }
+    loadArticles();
+  </script>
+</body>
+</html>
